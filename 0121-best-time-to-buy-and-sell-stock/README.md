@@ -20,5 +20,6 @@ Result: Haskell accepted 36 / 36 fixed/generated cases. Racket is not listed in
 `problem.json` yet because this machine does not currently have `racket` on
 PATH, so the local Racket judge has not been run.
 
-The Racket submission follows the LeetCode nonempty-list constraint by using
-`(first prices)` to seed the fold.
+The latest Racket submission makes the LeetCode nonempty-list constraint
+explicit with `cons/c`, uses `in-list` for list traversal, and seeds the fold
+from `(first prices)`.
