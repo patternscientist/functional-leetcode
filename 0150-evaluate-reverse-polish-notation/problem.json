@@ -1,0 +1,19 @@
+{
+  "id": 150,
+  "slug": "evaluate-reverse-polish-notation",
+  "title": "Evaluate Reverse Polish Notation",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "stack-fold"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "stack-machine",
+      "operand-order"
+    ]
+  }
+}

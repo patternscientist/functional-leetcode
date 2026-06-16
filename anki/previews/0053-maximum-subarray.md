@@ -1,0 +1,23 @@
+# 53. Maximum Subarray
+
+## Pattern
+
+Kadane's recurrence as a scan: each cell is the best subarray sum ending here.
+
+## Invariant
+
+At each element, bestEndingHere is the maximum sum of a subarray ending exactly at that element; the final answer is the maximum scanned state.
+
+## Code
+
+maxSubarray = maximum . scanl1 step
+  where
+    step bestEndingHere x = max x (bestEndingHere + x)
+
+## Complexity
+
+Time: O(n). Space: O(n) for the scanned list; can be O(1) with the tuple-fold version.
+
+## Pitfall(s)
+
+Do not seed the recurrence with 0 for LeetCode's nonempty input, or all-negative arrays incorrectly return 0.

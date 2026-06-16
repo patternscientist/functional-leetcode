@@ -1,0 +1,19 @@
+{
+  "id": 200,
+  "slug": "number-of-islands",
+  "title": "Number of Islands",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "grid-bfs-components"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "connected-components",
+      "grid-traversal"
+    ]
+  }
+}

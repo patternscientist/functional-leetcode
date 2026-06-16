@@ -1,0 +1,87 @@
+Slug	Id	Title	Difficulty	Topic	Pattern	Invariant	Code	Complexity	Pitfall(s)	Racket Comparison	Source
+two-sum	1	Two Sum	Easy	Array; Hash Table	Hash map of previously seen values, queried by complement before inserting the current value.	Before index i, the map contains exactly the values from indices 0..i-1, so a successful complement lookup always uses an earlier, different element.	"twoSum nums target = go M.empty 0 nums
+  where
+    go seen i (x:xs) =
+      case M.lookup (target - x) seen of
+        Just j -> (j, i)
+        Nothing -> go (M.insert x i seen) (i + 1) xs"	Time: O(n log n) with Data.Map.Strict. Space: O(n). A hash-map implementation would target average O(n).	Check the complement before inserting the current value; otherwise target = 2*x can match the same element with itself.		0001-two-sum/haskell/Solution.hs
+longest-substring-without-repeating-characters	3	Longest Substring Without Repeating Characters	Medium	String; Sliding Window; Map	Left fold over indexed characters with state `(start, best, seen)`.	After processing index i, `start` is the left edge of the current duplicate-free window, `seen` stores latest positions, and `best` is the best window length seen so far.	"lengthOfLongestSubstring =
+  snd3 . foldl' step (0, 0, IM.empty) . zip [0..] . map C.ord
+  where
+    step (start, best, seen) (i, k) =
+      let start' = maybe start (max start . (+ 1)) (IM.lookup k seen)
+          best' = max best (i - start' + 1)
+          seen' = IM.insert k i seen
+      in (start', best', seen')"	Time: O(n log a) with IntMap over the character-code alphabet. Space: O(a).	`start` must never move backward when a repeated character was last seen before the current window.		0003-longest-substring-without-repeating-characters/haskell/Solution.hs
+3sum	15	3Sum	Medium	Array; Sorting; Two Pointers	Sort, fix one index, then run a two-pointer two-sum scan on the suffix.	For a fixed i, l and r bound the remaining candidate range; sorted order tells which pointer can move after comparing the sum to zero.	"for each non-duplicate i:
+  l = i + 1; r = n - 1
+  move l/r by sum, and skip duplicate l/r values after a hit"	Time: O(n^2). Space: O(n) for sorting/array representation.	Canonicalize outputs in tests; the algorithm may produce valid triples in a different order. Skip duplicates at both the fixed index and after hits.		0015-3sum/haskell/Solution.hs
+valid-parentheses	20	Valid Parentheses	Easy	String; Stack	Stack of unmatched opening delimiters.	After a prefix, the stack is exactly the unmatched openers in the order they must be closed, with the nearest opener on top.	"isValid = finish . foldl step ([], True)
+
+step (stack, valid) ch
+  | isOpen ch = (ch : stack, valid)
+  | otherwise = match ch against the stack top"	Time: O(n). Space: O(n) in the all-openers case.	Handle early closing brackets and leftover openers. The imported version normalizes the source's token list to `String -> Bool`.		0020-valid-parentheses/haskell/Solution.hs
+search-in-rotated-sorted-array	33	Search in Rotated Sorted Array	Medium	Array; Binary Search	Binary search with sorted-side detection.	At each step, at least one side of the interval is sorted; use that side's bounds to decide whether the target can live there.	"if nums[l] <= nums[mid]
+  then left side is sorted
+  else right side is sorted
+
+Discard the sorted side only when target is outside its bounds."	Time: O(log n). Space: O(n) here for array conversion, O(1) with native random-access input.	Use strict/exclusive bounds around `mid` correctly. Generated tests over all rotations are excellent at catching off-by-one errors.		0033-search-in-rotated-sorted-array/haskell/Solution.hs
+trapping-rain-water	42	Trapping Rain Water	Hard	Array; Two Pointers; Prefix/Suffix	Two-pointer refinement of the prefix/suffix maxima specification.	The side with the smaller current max has its trapped water determined; the opposite side already supplies a high enough boundary.	"step l r leftMax rightMax amount
+  | leftMax' <= rightMax' = consume left
+  | otherwise = consume right"	Time: O(n). Space: O(n) here for array indexing; O(1) extra with direct indexing in an imperative setting.	The scan specification is simpler for testing. The two-pointer solution depends on consuming the side with the lower boundary.		0042-trapping-rain-water/haskell/Solution.hs
+maximum-subarray	53	Maximum Subarray	Medium	Array; Dynamic Programming	Kadane's recurrence as a scan: each cell is the best subarray sum ending here.	At each element, bestEndingHere is the maximum sum of a subarray ending exactly at that element; the final answer is the maximum scanned state.	"maxSubarray = maximum . scanl1 step
+  where
+    step bestEndingHere x = max x (bestEndingHere + x)"	Time: O(n). Space: O(n) for the scanned list; can be O(1) with the tuple-fold version.	Do not seed the recurrence with 0 for LeetCode's nonempty input, or all-negative arrays incorrectly return 0.		0053-maximum-subarray/haskell/Solution.hs
+balanced-binary-tree	110	Balanced Binary Tree	Easy	Tree; DFS	Bottom-up height fold with `Nothing` as early failure.	`Just h` means the subtree is balanced and has height h; `Nothing` means some descendant already violates the balance condition.	"heightOrFail Empty = Just (-1)
+heightOrFail (Node _ l r) = do
+  lh <- heightOrFail l
+  rh <- heightOrFail r
+  if abs (lh - rh) > 1 then Nothing else Just (1 + max lh rh)"	Time: O(n). Space: O(h) call stack.	Do not use `Nothing` for an empty child. Empty is a successful balanced subtree; `Nothing` is reserved for failure.		0110-balanced-binary-tree/haskell/Solution.hs
+best-time-to-buy-and-sell-stock	121	Best Time to Buy and Sell Stock	Easy	Array; Dynamic Programming	Left fold with product state: minimum price seen so far and best profit so far.	After a prefix, bottom is the minimum price in that prefix and best is the best buy-before-sell profit inside the prefix, floored at 0.	"maxProfit = snd . foldl' step (maxBound, 0)
+  where
+    step (bottom, best) x =
+      let bottom' = min bottom x
+          best' = max best (x - bottom')
+      in (bottom', best')"	Time: O(n). Space: O(1).	Update the minimum before computing x - bottom'; that still respects buy-before-sell because same-day profit is 0.		0121-best-time-to-buy-and-sell-stock/haskell/Solution.hs
+valid-palindrome	125	Valid Palindrome	Easy	String; Two Pointers	Two pointers with on-demand normalization: skip non-alphanumerics and compare lowercase endpoints.	Before each comparison, all characters outside the pointer interval have already matched under the normalization policy.	"isPalindrome s = step 0 (length s - 1) True
+
+step l r ok skips punctuation inward, compares lowercase alphanumeric endpoints, then recurs inward"	Time: O(n). Space: O(n) here for the array; the pointer idea itself can be O(1) extra.	Underscore is not alphanumeric. Digits remain significant. Empty normalized strings are palindromes.		0125-valid-palindrome/haskell/Solution.hs
+evaluate-reverse-polish-notation	150	Evaluate Reverse Polish Notation	Medium	Array; Stack	Stack machine over tokens: push literals, pop two operands for each operator.	After each prefix of the token stream, the stack holds the values of complete subexpressions from that prefix, topmost first.	"evalRPN tokens = case foldl' step [] tokens of
+  [] -> 0
+  t:_ -> t
+
+step stack token = case readMaybe token of
+  Just n -> n : stack
+  Nothing -> pop two operands and apply token"	Time: O(n). Space: O(n) for the stack.	Operand order matters: for stack `s1:s0:rest`, subtraction and division are `s0 - s1` and `s0 quot s1`.		0150-evaluate-reverse-polish-notation/haskell/Solution.hs
+number-of-islands	200	Number of Islands	Medium	Matrix; Connected Components	Scan the grid; each unseen land cell starts a BFS that marks one whole component.	All cells already scanned or reached by prior BFS runs are non-land in the working array; each new land root contributes exactly one island.	"fold over array indices
+  if current cell is '1': BFS mark its component and increment count
+  otherwise continue"	Time: O(mn). Space: O(mn).	Mark when enqueuing neighbors, not after repeated rediscovery, to avoid duplicate queue work.		0200-number-of-islands/haskell/Solution.hs
+invert-binary-tree	226	Invert Binary Tree	Easy	Tree; Recursion	Structural recursion over a binary tree.	The inverted tree preserves every node value and recursively swaps the left and right subtrees at every node.	"invertTree Empty = Empty
+invertTree (Node x l r) = Node x (invertTree r) (invertTree l)"	Time: O(n). Space: O(h) call stack.	The useful property check is involution: inverting twice returns the original tree.		0226-invert-binary-tree/haskell/Solution.hs
+product-of-array-except-self	238	Product of Array Except Self	Medium	Array; Prefix/Suffix Product	Prefix and suffix scans over multiplication, then pointwise combine.	At index i, the answer is product(elements before i) times product(elements after i). No division is needed, so zeros are handled naturally.	"productExceptSelf =
+  zipWith (*) <$> (init . scanl (*) 1) <*> (drop 1 . scanr (*) 1)"	Time: O(n). Space: O(n) for prefix/suffix scan lists.	Use `drop 1` on the suffix scan rather than dividing by nums[i]; division fails on zeros and is outside the intended pattern.		0238-product-of-array-except-self/haskell/Solution.hs
+coin-change	322	Coin Change	Medium	Dynamic Programming; Array	Bottom-up DP table over amounts, with `amount + 1` as the unreachable sentinel.	After filling amount n, table[n] is the fewest coins needed for n using the available positive denominations, or the sentinel if unreachable.	"dp coins amount = a A.! amount
+  where
+    inf = amount + 1
+    a = A.array (0, amount) [(x, f x) | x <- [0..amount]]
+    f 0 = 0
+    f n = minimumOrInf [1 + a A.! (n - coin) | coin <- coins, n - coin >= 0]"	Time: O(amount * number of coins). Space: O(amount).	A recurrence that names `dp` is not necessarily shared. Tie the table once or use an array; otherwise repeated indexing/reconstruction can dominate.		0322-coin-change/haskell/Solution.hs
+01-matrix	542	01 Matrix	Medium	Matrix; Multi-source BFS	Multi-source BFS from all zero cells to fill nearest-zero distances.	When a cell first receives a distance, that distance is minimal because BFS expands in increasing distance order from all zero sources.	"dist0 = 0 at every zero and -1 elsewhere
+q0 = all zero cells
+for each popped cell, assign unseen neighbors distance + 1"	Time: O(mn). Space: O(mn).	Start from all zeros. Starting BFS separately from each one-cell is much slower and obscures the invariant.		0542-01-matrix/haskell/Solution.hs
+diameter-of-binary-tree	543	Diameter of Binary Tree	Easy	Tree; DFS	Tree fold returning a pair: height and best diameter seen below.	For each node, height is the longest downward edge count, while best is the maximum of left best, right best, and the path through this node.	"heightAndBest Empty = (-1, -1)
+heightAndBest (Node _ l r) =
+  let (lh, lb) = heightAndBest l
+      (rh, rb) = heightAndBest r
+  in (1 + max lh rh, maximum [lb, rb, lh + rh + 2])"	Time: O(n). Space: O(h) call stack.	Use edge counts consistently: empty height -1 makes a leaf height 0 and leaf diameter 0.		0543-diameter-of-binary-tree/haskell/Solution.hs
+binary-search	704	Binary Search	Easy	Array; Binary Search	Closed-interval binary search.	If the target exists, it is inside the current inclusive interval `[l, r]`; outside the interval has been ruled out.	"step l r
+  | l <= r = compare target with nums[mid] and keep the half that can still contain it
+  | otherwise = -1"	Time: O(log n). Space: O(n) here for array conversion, O(1) with native random-access input.	Move past `mid` on recursive calls. Empty input starts with `l = 0, r = -1` and returns -1 without indexing.		0704-binary-search/haskell/Solution.hs
+flood-fill	733	Flood Fill	Easy	Matrix; BFS; DFS	BFS over the connected component of cells matching the source color, followed by one final update.	The queue contains same-color cells whose neighbors still need scanning; the visited map marks exactly same-color cells already reached from the start.	"floodFill image sr sc color
+  | originalColor == color = image
+  | otherwise = recolor visitedComponent
+
+step (q, visited) = dequeue one cell, enqueue unseen same-color neighbors"	Time: O(mn log mn) with Map. Space: O(mn).	Do not cross diagonals, and do not mutate/rewrite the array repeatedly when a final component update will do.		0733-flood-fill/haskell/Solution.hs
+rotting-oranges	994	Rotting Oranges	Medium	Matrix; Multi-source BFS	Multi-source BFS by levels, starting from every initially rotten orange.	After each minute, all oranges reachable in that many steps from any source are rotten, and the queue holds the next frontier.	"q0 = enqueue all initially rotten cells
+process one queue level at a time
+increment time only if that level rotted at least one fresh orange"	Time: O(mn). Space: O(mn).	Minute count is level-based, not pop-based. Return -1 if fresh oranges remain after the queue is empty.		0994-rotting-oranges/haskell/Solution.hs

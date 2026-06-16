@@ -1,0 +1,20 @@
+{
+  "deck": "Functional LeetCode",
+  "model": "Functional LeetCode model",
+  "tags": ["FunctionalLeetCode::language::haskell", "FunctionalLeetCode::topic::stack"],
+  "fields": {
+    "Slug": "evaluate-reverse-polish-notation",
+    "Id": "150",
+    "Title": "Evaluate Reverse Polish Notation",
+    "Difficulty": "Medium",
+    "Topic": "Array; Stack",
+    "Pattern": "Stack machine over tokens: push literals, pop two operands for each operator.",
+    "Invariant": "After each prefix of the token stream, the stack holds the values of complete subexpressions from that prefix, topmost first.",
+    "Code": "evalRPN tokens = case foldl' step [] tokens of\n  [] -> 0\n  t:_ -> t\n\nstep stack token = case readMaybe token of\n  Just n -> n : stack\n  Nothing -> pop two operands and apply token",
+    "Complexity": "Time: O(n). Space: O(n) for the stack.",
+    "Pitfall(s)": "Operand order matters: for stack `s1:s0:rest`, subtraction and division are `s0 - s1` and `s0 quot s1`.",
+    "Racket Comparison": "",
+    "Source": "0150-evaluate-reverse-polish-notation/haskell/Solution.hs"
+  }
+}
+

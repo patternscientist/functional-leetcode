@@ -1,0 +1,19 @@
+{
+  "id": 733,
+  "slug": "flood-fill",
+  "title": "Flood Fill",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "reachable-set-final-update"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "graph-traversal",
+      "representation-change"
+    ]
+  }
+}

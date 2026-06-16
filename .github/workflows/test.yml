@@ -1,0 +1,55 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: haskell-actions/setup@v2
+        with:
+          ghc-version: "9.4.8"
+          cabal-version: "3.12.1.0"
+
+      - name: Detect accepted Racket solutions
+        id: racket
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          from pathlib import Path
+          exists = False
+          for path in Path('.').glob('[0-9][0-9][0-9][0-9]-*/problem.json'):
+              data = json.loads(path.read_text())
+              exists = exists or (
+                  data.get('status') == 'accepted' and
+                  'racket' in data.get('languages', {})
+              )
+          print(f"exists={str(exists).lower()}")
+          PY
+
+      - uses: Bogdanp/setup-racket@v1.14
+        if: steps.racket.outputs.exists == 'true'
+        with:
+          version: "stable"
+
+      - name: Judge self-tests
+        run: python -m unittest discover -s judge/tests
+
+      - name: Validate metadata
+        run: python judge/judge.py validate
+
+      - name: Run accepted solutions
+        run: python judge/judge.py test-all

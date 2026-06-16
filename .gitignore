@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+.pytest_cache/
+
+# Judge build/work directories
+.judge_build/
+.judge_work/
+
+# Haskell build products
+*.hi
+*.o
+*.dyn_hi
+*.dyn_o
+*.exe
+
+# Local setup bundle inputs. These are authoritative local inputs, not repo
+# artifacts to preserve in GitHub.
+/inputs/
+/references/
+/00_READ_ME_FIRST.md
+/01_CODEX_STARTER_PROMPT.md
+/02_STABLE_POLICIES.md
+/03_ANKI_WORKFLOW_CONTEXT.md
+/04_CURRENT_PROJECT_STATE.md
+/05_BUNDLE_MANIFEST.md
+/SHA256SUMS.txt
+

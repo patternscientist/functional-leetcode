@@ -1,0 +1,19 @@
+{
+  "id": 53,
+  "slug": "maximum-subarray",
+  "title": "Maximum Subarray",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "scan-kadane"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "space-compressed-dp",
+      "scan-invariant"
+    ]
+  }
+}

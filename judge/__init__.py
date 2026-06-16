@@ -1,0 +1,2 @@
+"""Functional LeetCode judge package."""
+

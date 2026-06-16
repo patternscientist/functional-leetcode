@@ -1,0 +1,19 @@
+{
+  "id": 704,
+  "slug": "binary-search",
+  "title": "Binary Search",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "closed-interval-binary-search"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "binary-search",
+      "interval-invariant"
+    ]
+  }
+}

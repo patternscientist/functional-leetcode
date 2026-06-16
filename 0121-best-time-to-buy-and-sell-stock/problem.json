@@ -1,0 +1,19 @@
+{
+  "id": 121,
+  "slug": "best-time-to-buy-and-sell-stock",
+  "title": "Best Time to Buy and Sell Stock",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "single-pass-min-prefix"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "fold-state",
+      "prefix-minimum-invariant"
+    ]
+  }
+}

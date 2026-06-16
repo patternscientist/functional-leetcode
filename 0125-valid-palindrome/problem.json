@@ -1,0 +1,19 @@
+{
+  "id": 125,
+  "slug": "valid-palindrome",
+  "title": "Valid Palindrome",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "two-pointer-normalized-comparison"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "two-pointers",
+      "normalization-policy"
+    ]
+  }
+}

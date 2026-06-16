@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "slug": "two-sum",
+  "title": "Two Sum",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "hash-map-complements"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "hash-map-complements",
+      "self-match-pitfall"
+    ]
+  }
+}

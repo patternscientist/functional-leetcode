@@ -1,0 +1,19 @@
+{
+  "id": 110,
+  "slug": "balanced-binary-tree",
+  "title": "Balanced Binary Tree",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "height-or-fail"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "tree-fold",
+      "early-failure"
+    ]
+  }
+}

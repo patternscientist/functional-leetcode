@@ -1,0 +1,19 @@
+{
+  "id": 322,
+  "slug": "coin-change",
+  "title": "Coin Change",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "array-dp"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "dynamic-programming",
+      "representation-change"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": 226,
+  "slug": "invert-binary-tree",
+  "title": "Invert Binary Tree",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "structural-recursion"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "tree-recursion"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "deck": "Functional LeetCode",
+  "model": "Functional LeetCode model",
+  "tags": ["FunctionalLeetCode::language::haskell", "FunctionalLeetCode::topic::tree"],
+  "fields": {
+    "Slug": "invert-binary-tree",
+    "Id": "226",
+    "Title": "Invert Binary Tree",
+    "Difficulty": "Easy",
+    "Topic": "Tree; Recursion",
+    "Pattern": "Structural recursion over a binary tree.",
+    "Invariant": "The inverted tree preserves every node value and recursively swaps the left and right subtrees at every node.",
+    "Code": "invertTree Empty = Empty\ninvertTree (Node x l r) = Node x (invertTree r) (invertTree l)",
+    "Complexity": "Time: O(n). Space: O(h) call stack.",
+    "Pitfall(s)": "The useful property check is involution: inverting twice returns the original tree.",
+    "Racket Comparison": "",
+    "Source": "0226-invert-binary-tree/haskell/Solution.hs"
+  }
+}
+

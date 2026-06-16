@@ -1,0 +1,19 @@
+{
+  "id": 543,
+  "slug": "diameter-of-binary-tree",
+  "title": "Diameter of Binary Tree",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "height-and-best-fold"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "tree-fold",
+      "summary-pair"
+    ]
+  }
+}

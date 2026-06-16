@@ -1,0 +1,19 @@
+{
+  "id": 3,
+  "slug": "longest-substring-without-repeating-characters",
+  "title": "Longest Substring Without Repeating Characters",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "sliding-window-intmap"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "sliding-window",
+      "map-valued-fold-state"
+    ]
+  }
+}

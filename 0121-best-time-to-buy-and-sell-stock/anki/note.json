@@ -1,0 +1,24 @@
+{
+  "deck": "Functional LeetCode",
+  "model": "Functional LeetCode model",
+  "tags": [
+    "FunctionalLeetCode::language::haskell",
+    "FunctionalLeetCode::topic::array",
+    "FunctionalLeetCode::pattern::fold-state"
+  ],
+  "fields": {
+    "Slug": "best-time-to-buy-and-sell-stock",
+    "Id": "121",
+    "Title": "Best Time to Buy and Sell Stock",
+    "Difficulty": "Easy",
+    "Topic": "Array; Dynamic Programming",
+    "Pattern": "Left fold with product state: minimum price seen so far and best profit so far.",
+    "Invariant": "After a prefix, bottom is the minimum price in that prefix and best is the best buy-before-sell profit inside the prefix, floored at 0.",
+    "Code": "maxProfit = snd . foldl' step (maxBound, 0)\n  where\n    step (bottom, best) x =\n      let bottom' = min bottom x\n          best' = max best (x - bottom')\n      in (bottom', best')",
+    "Complexity": "Time: O(n). Space: O(1).",
+    "Pitfall(s)": "Update the minimum before computing x - bottom'; that still respects buy-before-sell because same-day profit is 0.",
+    "Racket Comparison": "",
+    "Source": "0121-best-time-to-buy-and-sell-stock/haskell/Solution.hs"
+  }
+}
+

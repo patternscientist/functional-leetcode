@@ -1,0 +1,19 @@
+{
+  "id": 42,
+  "slug": "trapping-rain-water",
+  "title": "Trapping Rain Water",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "two-pointers"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "two-pointers",
+      "prefix-suffix-spec"
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": 542,
+  "slug": "01-matrix",
+  "title": "01 Matrix",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "multi-source-bfs"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "multi-source-bfs",
+      "distance-transform"
+    ]
+  }
+}

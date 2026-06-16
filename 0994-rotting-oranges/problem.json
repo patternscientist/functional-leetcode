@@ -1,0 +1,19 @@
+{
+  "id": 994,
+  "slug": "rotting-oranges",
+  "title": "Rotting Oranges",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "multi-source-bfs"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "multi-source-bfs",
+      "frontier-levels"
+    ]
+  }
+}

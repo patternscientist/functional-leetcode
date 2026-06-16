@@ -1,0 +1,19 @@
+{
+  "id": 20,
+  "slug": "valid-parentheses",
+  "title": "Valid Parentheses",
+  "status": "accepted",
+  "languages": {
+    "haskell": {
+      "canonical": "haskell/Solution.hs",
+      "approach": "stack"
+    }
+  },
+  "anki": {
+    "candidate": true,
+    "reasons": [
+      "stack",
+      "delimiter-matching"
+    ]
+  }
+}

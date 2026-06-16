@@ -1,0 +1,24 @@
+{
+  "deck": "Functional LeetCode",
+  "model": "Functional LeetCode model",
+  "tags": [
+    "FunctionalLeetCode::language::haskell",
+    "FunctionalLeetCode::topic::sliding-window",
+    "FunctionalLeetCode::pattern::map-state"
+  ],
+  "fields": {
+    "Slug": "longest-substring-without-repeating-characters",
+    "Id": "3",
+    "Title": "Longest Substring Without Repeating Characters",
+    "Difficulty": "Medium",
+    "Topic": "String; Sliding Window; Map",
+    "Pattern": "Left fold over indexed characters with state `(start, best, seen)`.",
+    "Invariant": "After processing index i, `start` is the left edge of the current duplicate-free window, `seen` stores latest positions, and `best` is the best window length seen so far.",
+    "Code": "lengthOfLongestSubstring =\n  snd3 . foldl' step (0, 0, IM.empty) . zip [0..] . map C.ord\n  where\n    step (start, best, seen) (i, k) =\n      let start' = maybe start (max start . (+ 1)) (IM.lookup k seen)\n          best' = max best (i - start' + 1)\n          seen' = IM.insert k i seen\n      in (start', best', seen')",
+    "Complexity": "Time: O(n log a) with IntMap over the character-code alphabet. Space: O(a).",
+    "Pitfall(s)": "`start` must never move backward when a repeated character was last seen before the current window.",
+    "Racket Comparison": "",
+    "Source": "0003-longest-substring-without-repeating-characters/haskell/Solution.hs"
+  }
+}
+
