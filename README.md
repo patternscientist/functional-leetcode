@@ -15,7 +15,6 @@ judge/                 Python orchestration layer
 shared/haskell/        Haskell test helpers and reusable structures
 shared/racket/         Racket test helpers
 tools/                 Import and reporting helpers
-0001-two-sum/          Pending judge scaffold, not a Lib.hs solution
 0003-... through        Haskell imports from the current `inputs/Lib.hs`
 0994-...
 ```
@@ -44,7 +43,6 @@ outputs, and timeouts must not change during a submission.
 
 ## Current Import Status
 
-`0001-two-sum` is pending because it is not present in `inputs/Lib.hs`.
 `0110-balanced-binary-tree` is pending because the active `Lib.hs` attempt fails
 expanded balance edge cases. The rest of the active imported Haskell files are
 intended to be accepted only after direct judge runs.

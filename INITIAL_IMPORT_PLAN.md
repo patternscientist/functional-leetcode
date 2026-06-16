@@ -15,8 +15,6 @@ Policy:
 - Commented historical implementations are not solutions until they pass the
   problem judge. Preserve them only under `attempts/` unless they are later
   accepted as variants.
-- `0001-two-sum` is only a judge scaffold because it does not appear in
-  `inputs/Lib.hs`.
 - `0110-balanced-binary-tree` is pending because the active source attempt treats
   `Empty` as failure; a corrected version should not be substituted silently.
 
@@ -24,7 +22,6 @@ Policy:
 
 | Problem | Status |
 | --- | --- |
-| `0001-two-sum` | pending; judge scaffold only, not in `inputs/Lib.hs` |
 | `0003-longest-substring-without-repeating-characters` | accepted active `Lib.hs` import after direct judge run |
 | `0015-3sum` | accepted active `Lib.hs` import after direct judge run |
 | `0020-valid-parentheses` | accepted active `Lib.hs` import after direct judge run |
