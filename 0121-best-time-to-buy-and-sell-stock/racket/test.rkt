@@ -3,6 +3,20 @@
 (require "solution.rkt"
          "../../shared/racket/test-utils.rkt")
 
+(define (check name prices)
+  (list name (lambda () (= (slow-max-profit prices) (max-profit prices)))))
+
+(define (slow-max-profit prices)
+  (apply max
+         0
+         (for*/list ([buy (in-range (length prices))]
+                     [sell (in-range (+ buy 1) (length prices))])
+           (- (list-ref prices sell) (list-ref prices buy)))))
+
+(define (generated-prices n)
+  (for/list ([i (in-range n)])
+    (+ (modulo (+ (* i i) (* 7 i) (* 3 n)) 23) 1)))
+
 (define fixed-cases
   (list
    (check "example profit" '(7 1 5 3 6 4))
@@ -14,20 +28,6 @@
 (define generated-cases
   (for/list ([n (in-range 1 31)])
     (check (format "generated length ~a" n) (generated-prices n))))
-
-(define (generated-prices n)
-  (for/list ([i (in-range n)])
-    (+ (modulo (+ (* i i) (* 7 i) (* 3 n)) 23) 1)))
-
-(define (check name prices)
-  (list name (lambda () (= (slow-max-profit prices) (max-profit prices)))))
-
-(define (slow-max-profit prices)
-  (apply max
-         0
-         (for*/list ([buy (in-range (length prices))]
-                     [sell (in-range (+ buy 1) (length prices))])
-           (- (list-ref prices sell) (list-ref prices buy)))))
 
 (run-cases "0121-best-time-to-buy-and-sell-stock/racket"
            (append fixed-cases generated-cases))

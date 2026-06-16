@@ -1,7 +1,6 @@
 # 0053. Maximum Subarray
 
-Status: accepted Haskell initial import; LeetCode-accepted Racket submission
-captured for later local judge acceptance.
+Status: accepted Haskell initial import; accepted Racket submission.
 
 Judge shape:
 
@@ -17,9 +16,8 @@ python judge/judge.py test 0053 haskell
 python judge/judge.py test 0053 racket
 ```
 
-Result: Haskell accepted, 41 / 41 fixed/generated cases passed. Racket is not
-listed in `problem.json` yet because this machine does not currently have
-`racket` on PATH, so the local Racket judge has not been run.
+Result: Haskell accepted, 41 / 41 fixed/generated cases passed. Racket accepted,
+41 / 41 fixed/generated nonempty-list cases passed.
 
 The Racket submission follows the LeetCode nonempty-list constraint by using
 `(first nums)` to seed the fold.

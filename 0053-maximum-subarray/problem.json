@@ -7,6 +7,10 @@
     "haskell": {
       "canonical": "haskell/Solution.hs",
       "approach": "scan-kadane"
+    },
+    "racket": {
+      "canonical": "racket/solution.rkt",
+      "approach": "for/fold-kadane"
     }
   }
 }
