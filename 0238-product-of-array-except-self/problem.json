@@ -7,6 +7,10 @@
     "haskell": {
       "canonical": "haskell/Solution.hs",
       "approach": "prefix-suffix-scans"
+    },
+    "racket": {
+      "canonical": "racket/solution.rkt",
+      "approach": "prefix-suffix-products"
     }
   }
 }
