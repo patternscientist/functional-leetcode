@@ -8,12 +8,5 @@
       "canonical": "haskell/Solution.hs",
       "approach": "prefix-suffix-scans"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "prefix-suffix-scans",
-      "monoid-products"
-    ]
   }
 }

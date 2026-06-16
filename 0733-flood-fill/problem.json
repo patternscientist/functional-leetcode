@@ -8,12 +8,5 @@
       "canonical": "haskell/Solution.hs",
       "approach": "reachable-set-final-update"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "graph-traversal",
-      "representation-change"
-    ]
   }
 }

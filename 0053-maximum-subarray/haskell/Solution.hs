@@ -1,9 +1,6 @@
 module Solution (maxSubarray) where
 
--- LeetCode uses a nonempty list; [] is intentionally outside this function's
--- accepted input policy.
+-- Problem 53. Maximum Subarray
 maxSubarray :: [Int] -> Int
 maxSubarray = maximum . scanl1 step
-  where
-    step bestEndingHere x = max x (bestEndingHere + x)
-
+    where step bestEndingHere x = max x (bestEndingHere+x)

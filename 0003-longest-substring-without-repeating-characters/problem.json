@@ -8,12 +8,5 @@
       "canonical": "haskell/Solution.hs",
       "approach": "sliding-window-intmap"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "sliding-window",
-      "map-valued-fold-state"
-    ]
   }
 }

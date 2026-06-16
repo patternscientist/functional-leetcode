@@ -8,12 +8,5 @@
       "canonical": "haskell/Solution.hs",
       "approach": "sort-two-pointers"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "two-pointers",
-      "duplicate-skipping"
-    ]
   }
 }

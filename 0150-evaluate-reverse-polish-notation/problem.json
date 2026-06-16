@@ -8,12 +8,5 @@
       "canonical": "haskell/Solution.hs",
       "approach": "stack-fold"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "stack-machine",
-      "operand-order"
-    ]
   }
 }

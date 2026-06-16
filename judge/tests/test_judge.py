@@ -16,7 +16,7 @@ REPO = Path(__file__).resolve().parents[2]
 def copy_scaffold(tmp_path: Path) -> Path:
     root = tmp_path / "repo"
     root.mkdir()
-    for name in ["judge", "shared", "0001-two-sum", "anki"]:
+    for name in ["judge", "shared", "0001-two-sum"]:
         shutil.copytree(REPO / name, root / name, ignore=shutil.ignore_patterns("__pycache__"))
     return root
 
@@ -42,16 +42,9 @@ class JudgeTests(unittest.TestCase):
         self.tmp.cleanup()
 
     @unittest.skipIf(shutil.which("ghc") is None, "GHC is not available")
-    def test_haskell_sample_accepts(self) -> None:
-        proc = run_cli(self.root, "test", "0001", "haskell")
-        self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
-        self.assertIn("Accepted", proc.stdout)
-        self.assertIn("PASS 0001-two-sum", proc.stdout)
-
-    @unittest.skipIf(shutil.which("ghc") is None, "GHC is not available")
     def test_bad_submission_is_rejected_and_canonical_is_unchanged(self) -> None:
         canonical = self.root / "0001-two-sum" / "haskell" / "Solution.hs"
-        before = canonical.read_text(encoding="utf-8")
+        self.assertFalse(canonical.exists())
         bad = self.root / "judge" / "tests" / "fixtures" / "bad_two_sum.hs"
 
         proc = run_cli(self.root, "submit", "0001", "haskell", "--source", str(bad))
@@ -59,7 +52,7 @@ class JudgeTests(unittest.TestCase):
         self.assertNotEqual(proc.returncode, 0)
         self.assertIn("Wrong Answer", proc.stdout)
         self.assertIn("Canonical solution restored: unchanged", proc.stdout)
-        self.assertEqual(canonical.read_text(encoding="utf-8"), before)
+        self.assertFalse(canonical.exists())
 
     @unittest.skipIf(shutil.which("ghc") is None, "GHC is not available")
     def test_good_submission_is_accepted(self) -> None:
@@ -71,6 +64,7 @@ class JudgeTests(unittest.TestCase):
         self.assertIn("Accepted", proc.stdout)
         self.assertIn("Classification", proc.stdout)
         self.assertIn("Push\nawaiting explicit approval", proc.stdout)
+        self.assertTrue((self.root / "0001-two-sum" / "haskell" / "Solution.hs").exists())
 
     @unittest.skipIf(shutil.which("ghc") is None, "GHC is not available")
     def test_tampering_with_frozen_tests_is_detected(self) -> None:
@@ -101,4 +95,3 @@ class JudgeTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

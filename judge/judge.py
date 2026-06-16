@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-import json
 import os
 import shutil
 import subprocess
@@ -400,7 +399,6 @@ def add_problem(root: Path, args: argparse.Namespace) -> JudgeResult:
     (problem_dir / "haskell").mkdir(parents=True, exist_ok=True)
     if args.language == "racket":
         (problem_dir / "racket").mkdir(parents=True, exist_ok=True)
-    (problem_dir / "anki").mkdir(parents=True, exist_ok=True)
 
     problem = Problem(
         id=problem_id,
@@ -408,7 +406,6 @@ def add_problem(root: Path, args: argparse.Namespace) -> JudgeResult:
         title=args.title,
         status="pending",
         languages={args.language: LanguageConfig(canonical=canonical_relative_path(args.language))},
-        anki={"candidate": False, "reasons": []},
         path=problem_dir,
     )
     save_problem(problem)
@@ -468,26 +465,6 @@ def validate_all(root: Path) -> JudgeResult:
     return JudgeResult(ok, 0 if ok else 1, "\n".join(lines))
 
 
-def preview_anki(root: Path, problem_token: str) -> JudgeResult:
-    problem = find_problem(root, problem_token)
-    assert problem.path is not None
-    note_path = problem.path / "anki" / "note.json"
-    if not note_path.exists():
-        return JudgeResult(False, 2, f"No Anki note source found: {note_path}")
-    note = json.loads(note_path.read_text(encoding="utf-8"))
-    preview_dir = root / "anki" / "previews"
-    preview_dir.mkdir(parents=True, exist_ok=True)
-    preview_path = preview_dir / f"{problem.directory}.md"
-    fields = note.get("fields", {})
-    lines = [f"# {problem.id}. {problem.title}", ""]
-    for name in ["Pattern", "Invariant", "Code", "Complexity", "Pitfall(s)", "Racket Comparison"]:
-        value = fields.get(name, "")
-        if value:
-            lines.extend([f"## {name}", "", str(value).rstrip(), ""])
-    preview_path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
-    return JudgeResult(True, 0, f"Wrote {preview_path.relative_to(root)}")
-
-
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Functional LeetCode deterministic judge")
     parser.add_argument("--timeout", type=int, default=30, help="compile/run timeout in seconds")
@@ -513,9 +490,6 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("test-all", help="run all accepted solutions")
     sub.add_parser("validate", help="validate problem metadata")
-
-    preview = sub.add_parser("preview-anki", help="render one Anki note preview")
-    preview.add_argument("problem")
     return parser
 
 
@@ -545,8 +519,6 @@ def main(argv: list[str] | None = None) -> int:
             result = test_all(root, timeout=args.timeout)
         elif args.command == "validate":
             result = validate_all(root)
-        elif args.command == "preview-anki":
-            result = preview_anki(root, args.problem)
         else:
             parser.error(f"unhandled command: {args.command}")
     except (LookupError, ValueError) as exc:

@@ -8,12 +8,5 @@
       "canonical": "haskell/Solution.hs",
       "approach": "multi-source-bfs"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "multi-source-bfs",
-      "distance-transform"
-    ]
   }
 }

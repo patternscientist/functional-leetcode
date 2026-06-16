@@ -8,12 +8,5 @@
       "canonical": "haskell/Solution.hs",
       "approach": "single-pass-min-prefix"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "fold-state",
-      "prefix-minimum-invariant"
-    ]
   }
 }

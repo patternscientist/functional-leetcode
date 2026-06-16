@@ -1,22 +1,19 @@
 module Solution (Tree(..), isBalanced) where
 
 data Tree a = Empty | Node a (Tree a) (Tree a)
-  deriving (Eq, Show)
-
--- Empty subtrees are balanced and have height -1. Returning Nothing means an
--- actual balance failure, not absence of a node.
+    deriving (Eq,Show)
+-- Problem 110. Balanced Binary Tree
 heightOrFail :: Tree a -> Maybe Int
-heightOrFail Empty = Just (-1)
+heightOrFail Empty = Nothing
+heightOrFail (Node _ Empty Empty) = Just 0
 heightOrFail (Node _ l r) = do
-  lh <- heightOrFail l
-  rh <- heightOrFail r
-  if abs (lh - rh) > 1
-    then Nothing
-    else Just (1 + max lh rh)
+    lh <- heightOrFail l
+    rh <- heightOrFail r
+    if (abs (lh-rh) > 1)
+    then (Nothing::Maybe Int)
+    else return $ 1+(max lh rh)
 
 isBalanced :: Tree Int -> Bool
-isBalanced t =
-  case heightOrFail t of
+isBalanced t = case heightOrFail t of
     Nothing -> False
-    Just _ -> True
-
+    Just _  -> True

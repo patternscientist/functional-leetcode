@@ -8,11 +8,5 @@
       "canonical": "haskell/Solution.hs",
       "approach": "structural-recursion"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "tree-recursion"
-    ]
   }
 }

@@ -8,12 +8,5 @@
       "canonical": "haskell/Solution.hs",
       "approach": "two-pointer-normalized-comparison"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "two-pointers",
-      "normalization-policy"
-    ]
   }
 }

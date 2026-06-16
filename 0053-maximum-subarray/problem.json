@@ -8,12 +8,5 @@
       "canonical": "haskell/Solution.hs",
       "approach": "scan-kadane"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "space-compressed-dp",
-      "scan-invariant"
-    ]
   }
 }

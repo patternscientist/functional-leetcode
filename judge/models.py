@@ -46,7 +46,6 @@ class Problem:
     title: str
     status: str = "pending"
     languages: dict[str, LanguageConfig] = field(default_factory=dict)
-    anki: dict[str, Any] = field(default_factory=dict)
     path: Path | None = None
 
     @property
@@ -72,7 +71,6 @@ class Problem:
             title=str(data["title"]),
             status=str(data.get("status", "pending")),
             languages=languages,
-            anki=dict(data.get("anki", {})),
             path=path,
         )
 
@@ -86,7 +84,6 @@ class Problem:
                 name: config.to_json()
                 for name, config in sorted(self.languages.items())
             },
-            "anki": self.anki,
         }
 
 
@@ -179,4 +176,3 @@ def canonical_relative_path(language: str) -> str:
     if language == "racket":
         return "racket/solution.rkt"
     raise ValueError(f"unsupported language: {language}")
-

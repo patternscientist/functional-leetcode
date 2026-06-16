@@ -8,12 +8,5 @@
       "canonical": "haskell/Solution.hs",
       "approach": "array-dp"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "dynamic-programming",
-      "representation-change"
-    ]
   }
 }

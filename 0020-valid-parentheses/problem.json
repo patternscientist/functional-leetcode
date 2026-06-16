@@ -8,12 +8,5 @@
       "canonical": "haskell/Solution.hs",
       "approach": "stack"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "stack",
-      "delimiter-matching"
-    ]
   }
 }

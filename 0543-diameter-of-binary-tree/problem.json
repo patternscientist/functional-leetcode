@@ -8,12 +8,5 @@
       "canonical": "haskell/Solution.hs",
       "approach": "height-and-best-fold"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "tree-fold",
-      "summary-pair"
-    ]
   }
 }

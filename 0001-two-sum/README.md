@@ -1,8 +1,7 @@
 # 0001. Two Sum
 
-Status: accepted sample.
+Status: pending judge scaffold.
 
-The sample is intentionally small. It proves that the judge can compile Haskell
-directly, reject an incorrect implementation, accept the canonical
-implementation, and detect frozen-test tampering.
-
+This problem is not present in `inputs/Lib.hs`, so it is not published as one of
+the imported Haskell solutions. The directory remains only for judge submit and
+tamper self-tests.

@@ -8,12 +8,5 @@
       "canonical": "haskell/Solution.hs",
       "approach": "rotated-binary-search"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "binary-search",
-      "sorted-side-detection"
-    ]
   }
 }

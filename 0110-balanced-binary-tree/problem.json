@@ -2,18 +2,10 @@
   "id": 110,
   "slug": "balanced-binary-tree",
   "title": "Balanced Binary Tree",
-  "status": "accepted",
+  "status": "pending",
   "languages": {
     "haskell": {
-      "canonical": "haskell/Solution.hs",
-      "approach": "height-or-fail"
+      "approach": "active inputs/Lib.hs attempt; pending because expanded edge-case judge fails"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "tree-fold",
-      "early-failure"
-    ]
   }
 }

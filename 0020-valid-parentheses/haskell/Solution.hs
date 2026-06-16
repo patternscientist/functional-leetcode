@@ -1,21 +1,21 @@
 module Solution (isValid) where
 
-isValid :: String -> Bool
-isValid = finish . foldl step ([], True)
-  where
-    finish (stack, valid) = valid && null stack
+import qualified Data.Map as M
+import Data.List (foldl')
 
-    step (stack, valid) ch
-      | not valid = (stack, valid)
-      | isOpen ch = (ch : stack, valid)
-      | otherwise =
-          case stack of
-            [] -> (stack, False)
-            open:rest -> (rest, matches open ch)
+-- Problem 050. Valid Parentheses
+parenMap :: M.Map String String
+parenMap = M.fromList [("}","{"),("]","["),(")","(")]
 
-    isOpen ch = ch == '(' || ch == '[' || ch == '{'
-    matches '(' ')' = True
-    matches '[' ']' = True
-    matches '{' '}' = True
-    matches _ _ = False
-
+isValid :: [String] -> Bool
+isValid = finish . foldl' step ([],True)
+    where finish = \(ss,valid) -> valid && null ss
+          step   = \(ss,valid) s -> if not valid
+                                    then (ss,valid)
+                                    else if M.notMember s parenMap
+                                        then (s:ss,valid)
+                                        else case ss of
+                                                    [] -> (ss,not valid)
+                                                    s':rest -> if s' == parenMap M.! s
+                                                            then (rest,valid)
+                                                            else (rest,not valid)

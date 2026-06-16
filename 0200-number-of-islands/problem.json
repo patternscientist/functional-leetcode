@@ -8,12 +8,5 @@
       "canonical": "haskell/Solution.hs",
       "approach": "grid-bfs-components"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "connected-components",
-      "grid-traversal"
-    ]
   }
 }

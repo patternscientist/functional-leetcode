@@ -34,7 +34,7 @@ generatedString n =
     alphabet = "()[]{}"
 
 check :: String -> String -> Case
-check name s = Case name (assertEqual (slowValid s) (isValid s))
+check name s = Case name (assertEqual (slowValid s) (isValid (map (:[]) s)))
 
 slowValid :: String -> Bool
 slowValid s =

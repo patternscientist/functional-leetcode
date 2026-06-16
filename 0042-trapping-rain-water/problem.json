@@ -8,12 +8,5 @@
       "canonical": "haskell/Solution.hs",
       "approach": "two-pointers"
     }
-  },
-  "anki": {
-    "candidate": true,
-    "reasons": [
-      "two-pointers",
-      "prefix-suffix-spec"
-    ]
   }
 }
